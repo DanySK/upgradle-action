@@ -1,0 +1,25 @@
+name: "UpGradle"
+description: "Searches updates for your Gradle-based projects."
+author: "Danilo Pianini"
+inputs:
+  token:
+    description: "Github secret token. Must be a user token, GH Actions tokens won't work"
+    required: true
+  configuration_file:
+    description: "Path to the YAML configuration file in the local repository. Defaults to 'upgradle.yml'"
+    required: false
+    default: upgradle.yml
+  version:
+    description: "Upgradle version. If omitted, the latest beta will be used"
+    required: false
+    default: ''
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.token }}
+    - ${{ inputs.configuration_file }}
+    - ${{ inputs.version }}
+branding:
+  icon: 'arrow-up'
+  color: 'green'
